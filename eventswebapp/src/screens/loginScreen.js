@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import '../App.css'
+import '../styles/login.css'
 
 export default function LoginScreen() {
     const [userId, setUserId] = useState('');
@@ -27,24 +27,19 @@ export default function LoginScreen() {
     }
     
     return (
-        <body style={{
-            textAlign: 'center', 
-            backgroundColor: '#DCCCBB',
-            height: '100vh',
-            minHeight:'100vh',
-        }}>
+        <body>
             <h1>Event Manager</h1>
             <p>Please log-in with your UserID and password</p>
             <div class="Login">
                 <form>
                     <label className="label">UserID: </label>
                     <input className="input" value={userId} type="text" onChange ={handleUserId} />
-                    <br/>
+                    <br/><br/>
                     <label className='label'>Password: </label>
                     <input className="input" value={password} type="text" onChange={handlePassword}/>
-                    <br/>
-                    <br/>
-                    <button className="btn" type="submit" onClick={handleSubmit}>Submit</button>
+                    <br/><br/>
+                    <button className="btn1" type="submit" onClick={handleSubmit}>Submit</button>
+                    <button className="btn2">Register</button>
                 </form>
             </div>
         </body>
