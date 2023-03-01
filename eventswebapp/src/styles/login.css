@@ -1,4 +1,16 @@
-.LoginScreen {
-    background-color: #DCCCBB;
-    justify-content: center;
+h1 {
+    color: #a7754d;
 }
+
+body {
+    background-color: #DCCCBB;
+    text-align: center;
+    background-color: '#DCCCBB';
+    height: 100vh;
+    min-height: 100vh;
+}
+
+.btn1 {
+    margin-right: 20px;
+}
+
