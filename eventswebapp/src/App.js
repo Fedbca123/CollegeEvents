@@ -1,9 +1,10 @@
-import './App.css';
 import LoginScreen from './screens/loginScreen';
+import RegisterScreen from './screens/registerScreen';
 
 function App() {
   return (
-    <LoginScreen/>
+    //<LoginScreen/>
+    <RegisterScreen/>
   );
 }
 
