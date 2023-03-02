@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 export default function RegisterScreen() {
     const [userId, setUserId] = useState('');
     const [password, setPassword] = useState('');
+    const [level, setLevel] = useState('');
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(false);
 
@@ -13,9 +14,13 @@ export default function RegisterScreen() {
         setPassword(e.target.value);
     }
 
+    const handleLevel = (e) => {
+        setLevel(e.target.value);
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (userId === '' || password === '') {
+        if (userId === '' || password === '' || level === '') {
             setError(true);
         }
         else {
@@ -27,16 +32,22 @@ export default function RegisterScreen() {
     return (
         <body> 
             <h1>Event Manager</h1>
-            <p>Please register with a UserID and password</p>
+            <p>Please identify your user level and register with a UserID and password</p>
             <div class="Register">
                 <form>
+                    <input type="radio" name="userLevel" value="student" id="student"></input>
+                    <label className="label">Student</label>
+                    <input type="radio" name="userLevel" value="admin" id="admin"></input>
+                    <label className="label">University Admin</label>
+                    <br/><br/>
                     <label className="label">UserID: </label>
                     <input className="input" value={userId} type="text" onChange ={handleUserId} />
                     <br/><br/>
-                    <label className='label'>Password: </label>
-                    <input className="input" value={password} type="text" onChange={handlePassword}/>
+                    <label className="label">Password: </label>
+                    <input className="input" value={password} type="password" onChange={handlePassword}/>
                     <br/><br/>
-                    <button className="btn1" type="submit" onClick={handleSubmit}>Submit</button>
+                    <button className="btn1" type="submit" onClick={handleSubmit}>Register</button>
+                    <button className="btn2">Login</button>
                 </form>
             </div>
         </body>

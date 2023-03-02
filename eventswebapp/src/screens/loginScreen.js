@@ -36,7 +36,7 @@ export default function LoginScreen() {
                     <input className="input" value={userId} type="text" onChange ={handleUserId} />
                     <br/><br/>
                     <label className='label'>Password: </label>
-                    <input className="input" value={password} type="text" onChange={handlePassword}/>
+                    <input className="input" value={password} type="password" onChange={handlePassword}/>
                     <br/><br/>
                     <button className="btn1" type="submit" onClick={handleSubmit}>Submit</button>
                     <button className="btn2">Register</button>
