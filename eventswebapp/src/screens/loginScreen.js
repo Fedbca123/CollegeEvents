@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
+import {useNavigate} from "react-router-dom";
+import Routes from '../routes/routes';
 import '../styles/login.css'
 
 export default function LoginScreen() {
+    const navigate = useNavigate();
     const [userId, setUserId] = useState('');
     const [password, setPassword] = useState('');
     const [submitted, setSubmitted] = useState(false);
@@ -25,6 +28,10 @@ export default function LoginScreen() {
             setError(false);
         }
     }
+
+    function goToRegister() {
+        navigate('/register');
+    }
     
     return (
         <body>
@@ -39,7 +46,7 @@ export default function LoginScreen() {
                     <input className="input" value={password} type="password" onChange={handlePassword}/>
                     <br/><br/>
                     <button className="btn1" type="submit" onClick={handleSubmit}>Submit</button>
-                    <button className="btn2">Register</button>
+                    <button className="btn2" onClick={goToRegister}>Register</button>
                 </form>
             </div>
         </body>
