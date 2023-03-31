@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="../styles/login.css">
+    </head>
+    <body>
+        <div class="dashHead">
+            <h1>Events</h1>
+            <button class="addNewButt" onclick="openForm()">+</button></br><br>
+            <div class="form-popup" id="myForm">
+                <form action="/action_page.php" class="form-container"> <!--idk about that php i think it might be express related-->
+                  <h1>New Event</h1>
+              
+                  <label for="event"><b>Name</b></label>
+                  <input type="text" placeholder="Enter Name of Event" name="event" required>
+
+                  <label for="date"><b>Date</b></label>
+                  <input type="text" placeholder="Enter Date of Event" name="date" required>
+
+                  <label for="time"><b>Time</b></label>
+                  <input type="text" placeholder="Enter Time of Event" name="time" required>
+
+                  <label for="location"><b>Location</b></label>
+                  <input type="text" placeholder="Enter Location of Event" name="location" required>
+
+                  <label for="category"><b>Category</b></label>
+                  <input type="text" placeholder="Enter Category of Event" name="category" required>
+
+                  <label for="pnumber"><b>Phone Number</b></label>
+                  <input type="text" placeholder="Enter Number for Event" name="pnumber" required>
+
+                  <label for="email"><b>Email Address</b></label>
+                  <input type="text" placeholder="Enter Email for Event" name="email" required>
+
+                  <label for="description"><b>Description</b></label>
+                  <input type="text" placeholder="Enter Description of Event" name="description" required>
+              
+                  <button type="submit" class="btn">Create</button>
+                  <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                </form>
+            </div>
+            <script>
+                function openForm() {
+                  document.getElementById("myForm").style.display = "block";
+                }
+                
+                function closeForm() {
+                  document.getElementById("myForm").style.display = "none";
+                }
+            </script>
+        </div>
+        <div class="row">
+            <div class="column">Public
+                <div class="card">
+                    Hello
+                </div>
+            </div>
+            <div class="column">Private
+                <div class="card"></div>
+            </div>
+            <div class="column">RSO
+                <div class="card"></div>
+            </div>
+          </div>
+    </body>
+</html>

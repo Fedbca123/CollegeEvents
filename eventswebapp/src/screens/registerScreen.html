@@ -1,37 +1,8 @@
-import React, { useState } from 'react'
-
-export default function RegisterScreen() {
-    const [userId, setUserId] = useState('');
-    const [password, setPassword] = useState('');
-    const [level, setLevel] = useState('');
-    const [submitted, setSubmitted] = useState(false);
-    const [error, setError] = useState(false);
-
-    const handleUserId = (e) => {
-        setUserId(e.target.value);
-    }
-    
-    const handlePassword = (e) => {
-        setPassword(e.target.value);
-    }
-
-    const handleLevel = (e) => {
-        setLevel(e.target.value);
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (userId === '' || password === '' || level === '') {
-            setError(true);
-        }
-        else {
-            setSubmitted(true);
-            setError(false);
-        }
-    }
-
-    return (
-        <body> 
+<html>
+    <head>
+        <link rel="stylesheet" href="../styles/login.css">
+    </head>
+    <body> 
         <h1>Event Manager</h1>
         <p>Please identify your user level and register with a UserID and password</p>
         <div class="Register">
@@ -52,5 +23,4 @@ export default function RegisterScreen() {
             </form>
         </div>
     </body>
-    )
-}
+</html>

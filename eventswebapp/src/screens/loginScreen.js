@@ -1,10 +1,7 @@
 import React, { useState } from 'react'
-import {useNavigate} from "react-router-dom";
-import Routes from '../routes/routes';
 import '../styles/login.css'
 
 export default function LoginScreen() {
-    const navigate = useNavigate();
     const [userId, setUserId] = useState('');
     const [password, setPassword] = useState('');
     const [submitted, setSubmitted] = useState(false);
@@ -29,26 +26,20 @@ export default function LoginScreen() {
         }
     }
 
-    function goToRegister() {
-        navigate('/register');
-    }
-    
     return (
         <body>
-            <h1>Event Manager</h1>
-            <p>Please log-in with your UserID and password</p>
-            <div class="Login">
-                <form>
-                    <label className="label">UserID: </label>
-                    <input className="input" value={userId} type="text" onChange ={handleUserId} />
-                    <br/><br/>
-                    <label className='label'>Password: </label>
-                    <input className="input" value={password} type="password" onChange={handlePassword}/>
-                    <br/><br/>
-                    <button className="btn1" type="submit" onClick={handleSubmit}>Submit</button>
-                    <button className="btn2" onClick={goToRegister}>Register</button>
-                </form>
-            </div>
-        </body>
+        <h1>Event Manager</h1>
+        <p>Please log-in with your UserID and password</p>
+        <div class="Login">
+            <form>
+                <input className="input" placeholder="User ID" type="text" onChange ={handleUserId} />
+                <br/><br/>
+                <input className="input" placeholder="Password" type="password" onChange={handlePassword}/>
+                <br/><br/>
+                <input type="button" value="Login" onClick={login()}></input>
+               <input type="button" value="Register" onClick={goToRegister()}></input>
+            </form>
+        </div>
+    </body>
     );
 }

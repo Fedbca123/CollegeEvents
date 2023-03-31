@@ -1,4 +1,5 @@
-import LoginScreen from './screens/loginScreen';
+import LoginScreen from "./screens/loginScreen.js";
+
 
 function App() {
   return (
