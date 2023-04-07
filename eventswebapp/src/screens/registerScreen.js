@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export default function RegisterScreen() {
+const RegisterScreen = () => {
     const [userId, setUserId] = useState('');
     const [password, setPassword] = useState('');
     const [level, setLevel] = useState('');
@@ -34,7 +34,7 @@ export default function RegisterScreen() {
         <body> 
         <h1>Event Manager</h1>
         <p>Please identify your user level and register with a UserID and password</p>
-        <div class="Register">
+        <div className="Register">
             <form>
                 <input type="radio" name="userLevel" value="student" id="student"></input>
                 <label className="label">Student</label>
@@ -53,4 +53,5 @@ export default function RegisterScreen() {
         </div>
     </body>
     )
-}
+};
+export default RegisterScreen;

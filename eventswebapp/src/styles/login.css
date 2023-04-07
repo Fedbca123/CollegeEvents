@@ -17,6 +17,11 @@ body {
     width: 30%;
     padding: 0 10px;
   }
+.RSOcolumn {
+    float: left;
+    width: 48%;
+    padding: 0 10px;
+  }
   
   /* Clear floats after the columns */
   .row:after {

@@ -1,12 +1,15 @@
-import React, { useState } from 'react'
-import '../styles/login.css'
+import React, { useState } from 'react';
+import '../styles/login.css';
+import { Link } from 'react-router-dom';
 
-export default function LoginScreen() {
+//export default function LoginScreen() {
+    
+const LoginScreen = () => {
     const [userId, setUserId] = useState('');
     const [password, setPassword] = useState('');
     const [submitted, setSubmitted] = useState(false);
     const [error, setError] = useState(false);
-
+    
     const handleUserId = (e) => {
         setUserId(e.target.value);
     }
@@ -25,21 +28,31 @@ export default function LoginScreen() {
             setError(false);
         }
     }
-
     return (
         <body>
         <h1>Event Manager</h1>
         <p>Please log-in with your UserID and password</p>
-        <div class="Login">
+        <div className="Login">
             <form>
                 <input className="input" placeholder="User ID" type="text" onChange ={handleUserId} />
                 <br/><br/>
                 <input className="input" placeholder="Password" type="password" onChange={handlePassword}/>
                 <br/><br/>
-                <input type="button" value="Login" onClick={login()}></input>
-               <input type="button" value="Register" onClick={goToRegister()}></input>
+                {/* <input type="button" value="Login"> */}
+                    <Link to="/dash">
+                        <button type="button">Login</button>
+                    </Link>
+                {/* </input> */}
+                {/* <input type="button" value="Register"> */}
+                    <Link to="/register">
+                        <button type='button'>Register</button>
+                    </Link>
+                {/* </input> */}
             </form>
         </div>
-    </body>
+        </body>
     );
-}
+};
+export default LoginScreen;
+    
+//}
