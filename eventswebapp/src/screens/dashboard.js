@@ -13,8 +13,8 @@ export default function Dashboard() {
         <body>
             <div className="dashHead">
                 <h1>Events</h1>
-                <button className="addNewButt" onClick={openForm()}>+</button>
-                <div className="form-popup" id="myForm">
+                <button className="addNewButt" onClick={openForm()}>+</button><br/><br/><br/>
+                {/* <div className="form-popup" id="myForm">
                     <form action='/action_page.php' className="form-container">
                     <h1>New Event</h1>
                         <label id="event"><b>Name</b></label>
@@ -44,18 +44,21 @@ export default function Dashboard() {
                         <button type="submit" className="btn">Create</button>
                         <button type="button" className="btn cancel" onClick={closeForm()}>Close</button>
                     </form>
-                </div>
+                </div> */}
             </div>
             <div className="row">
-                <div className="column">Public
+                <div className="columnName">Public
                     <div className="card">
                         Hello
                     </div>
                 </div>
-                <div className="column">Private
+                <div className="columnName">Private
                     <div className="card"></div>
                 </div>
-                <div className="column">RSO
+                <div className="columnName">RSO
+                    <div className="card"></div>
+                </div>
+                <div className="columnName">Favorites
                     <div className="card"></div>
                 </div>
             </div>

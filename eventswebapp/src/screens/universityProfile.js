@@ -17,7 +17,7 @@ export default function University() {
                 <input className="input" id="location" type="text"/>
                 <br/><br/>
                 <label className="label">Description: </label>
-                <textarea rows="4"></textarea>
+                <textarea className="input" id="description" rows="4"></textarea>
                 <br/><br/>
                 <label className='label'>Number of students: </label>
                 <input className="input" id="numStudents" type="text"/>

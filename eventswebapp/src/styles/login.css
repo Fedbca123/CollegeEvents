@@ -1,9 +1,9 @@
 h1 {
-    color: #a7754d;
+    color: #873e23;
 }
 
 body {
-    background-color: #DCCCBB;
+    background-color: #EAB464;
     text-align: center;
     background-color: '#DCCCBB';
 }
@@ -12,11 +12,13 @@ body {
     margin-right: 20px;
 }
 
-.column {
+.columnName {
     float: left;
-    width: 30%;
-    padding: 0 10px;
-  }
+    width: 23.65%;
+    padding: 0px 10px;
+    font-size: 20px;
+}
+
 .RSOcolumn {
     float: left;
     width: 48%;
@@ -37,13 +39,19 @@ body {
 }
 .addNewButt {
     float: right;
+    background-color: #8D98A7;
+    color: #000;
+    border: none;
+    padding: 8px 14px;
+    font-size: 20px;
+    border-radius: 7px;
 }
 
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
     padding: 16px;
     text-align: center;
-    background-color: #f1f1f1;
+    background-color: #DCCCBB;
 }
 
 .form-popup {
@@ -93,3 +101,6 @@ body {
     opacity: 1;
 }
 
+#time {
+    width: 95px
+}

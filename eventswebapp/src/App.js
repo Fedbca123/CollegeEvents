@@ -3,6 +3,8 @@ import LoginScreen from "./screens/loginScreen.js";
 import Dashboard from './screens/dashboard.js';
 import RegisterScreen from './screens/registerScreen.js';
 import StudentOrgs from './screens/studentOrgs.js';
+import NewEvent from './screens/newEvent.js';
+import NewRSO from './screens/newRSO.js';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ReactDOM from "react-dom/client";
 
@@ -20,5 +22,7 @@ export default function App() {
     //<LoginScreen/>
     <Dashboard/>
     //<StudentOrgs/>
+    //<NewEvent/>
+    //<NewRSO/>
   );
 }
