@@ -25,8 +25,7 @@ body {
     padding: 0 10px;
   }
   
-  /* Clear floats after the columns */
-  .row:after {
+.row:after {
     content: "";
     display: table;
     clear: both;
@@ -37,6 +36,17 @@ body {
     display: inline;
     justify-content: center;
 }
+
+.pageButt {
+    background-color: #DCCCBB;
+    color: #000;
+    border: none;
+    padding: 16px 32px;
+    font-size: 20px;
+    border-radius: 7px;
+    margin-right: 20px;
+}
+
 .addNewButt {
     float: right;
     background-color: #8D98A7;
@@ -45,6 +55,10 @@ body {
     padding: 8px 14px;
     font-size: 20px;
     border-radius: 7px;
+}
+
+.addNewButt:hover {
+    background-color: #D3D3D3;
 }
 
 .card {
@@ -103,4 +117,41 @@ body {
 
 #time {
     width: 95px
+}
+
+/* Add a black background color to the top navigation */
+.topnav {
+    background-color: #873e23;
+    overflow: hidden;
+  }
+  
+  /* Style the links inside the navigation bar */
+  .topnav a {
+    color: #000;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+  /* Change the color of links on hover */
+  .topnav a:hover {
+    background-color: #DCCCBB;;
+    color: black;
+  }
+  
+  /* Add a color to the active/current link */
+  .topnav a.active {
+    background-color: #04AA6D;
+    color: white;
+  }
+
+.navbarButt {
+    float: left;
+    width: 10%;
+}
+
+.logoutButt {
+    float: right;
+    width: 10%;
 }

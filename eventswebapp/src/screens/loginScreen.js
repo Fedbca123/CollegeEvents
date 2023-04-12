@@ -38,8 +38,8 @@ const LoginScreen = () => {
                 <br/><br/>
                 <input className="input" placeholder="Password" type="password" onChange={handlePassword}/>
                 <br/><br/>
-                <Link to="/dash">
-                    <button type="button">Login</button>
+                <Link to="/events">
+                    <button type="button">Submit</button>
                 </Link>
                 <br/><br/>
                 <Link to="/register">

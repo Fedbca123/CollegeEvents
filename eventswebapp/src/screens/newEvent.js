@@ -5,6 +5,11 @@ export default function NewEvent() {
 
     return (
         <body>
+            <div class="topnav">
+                <Link to="/events" className="navbarButt">All Events</Link>
+                <Link to="/orgs" className="navbarButt">All RSOs</Link>
+                <Link to="/" className="logoutButt">Log out</Link>
+            </div>
             <h1>Register a New Event</h1>
             <form>
                 <label className="label">Name: </label>

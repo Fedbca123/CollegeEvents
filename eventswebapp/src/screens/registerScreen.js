@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
 
 const RegisterScreen = () => {
     const [userId, setUserId] = useState('');
@@ -47,8 +48,11 @@ const RegisterScreen = () => {
                 <label className="label">Password: </label>
                 <input className="input" value={password} type="password" onChange={handlePassword}/>
                 <br/><br/>
-                <button className="btn1" type="submit" onClick={handleSubmit}>Register</button>
-                <button className="btn2">Login</button>
+                <button className="btn1" type="submit" onClick={handleSubmit}>Submit</button>
+                <br/><br/>
+                <Link to="/">
+                    <button type="button">Login</button>
+                </Link>
             </form>
         </div>
     </body>

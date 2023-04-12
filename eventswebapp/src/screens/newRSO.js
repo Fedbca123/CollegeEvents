@@ -4,6 +4,11 @@ import { Link } from 'react-router-dom';
 export default function NewRSO() {
     return (
         <body>
+            <div class="topnav">
+                <Link to="/events" className="navbarButt">All Events</Link>
+                <Link to="/orgs" className="navbarButt">All RSOs</Link>
+                <Link to="/" className="logoutButt">Log out</Link>
+            </div>
             <h1>Create a new RSO</h1>
             <form>
                 <label className="label">RSO Name: </label>
