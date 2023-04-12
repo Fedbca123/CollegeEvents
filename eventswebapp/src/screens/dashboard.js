@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 function openForm() {
     //document.getElementById("myForm").style.display = "block";
     console.log("Open");
@@ -13,7 +14,9 @@ export default function Dashboard() {
         <body>
             <div className="dashHead">
                 <h1>Events</h1>
-                <button className="addNewButt" onClick={openForm()}>+</button><br/><br/><br/>
+                <Link to="/event">
+                    <button className="addNewButt"type='button'>+</button><br/><br/><br/>
+                </Link>
                 {/* <div className="form-popup" id="myForm">
                     <form action='/action_page.php' className="form-container">
                     <h1>New Event</h1>

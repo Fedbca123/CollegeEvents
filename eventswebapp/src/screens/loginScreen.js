@@ -38,16 +38,13 @@ const LoginScreen = () => {
                 <br/><br/>
                 <input className="input" placeholder="Password" type="password" onChange={handlePassword}/>
                 <br/><br/>
-                {/* <input type="button" value="Login"> */}
-                    <Link to="/dash">
-                        <button type="button">Login</button>
-                    </Link>
-                {/* </input> */}
-                {/* <input type="button" value="Register"> */}
-                    <Link to="/register">
-                        <button type='button'>Register</button>
-                    </Link>
-                {/* </input> */}
+                <Link to="/dash">
+                    <button type="button">Login</button>
+                </Link>
+                <br/><br/>
+                <Link to="/register">
+                    <button type='button'>Register</button>
+                </Link>
             </form>
         </div>
         </body>

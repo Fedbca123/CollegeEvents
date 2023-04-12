@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function NewRSO() {
     return (
@@ -23,7 +24,9 @@ export default function NewRSO() {
                 <label className="label">Member 4 Email: </label>
                 <input className="input" id="mem4" type="text"/>
                 <br/><br/>
-                <button className="btn1" type="submit">Create RSO</button>
+                <Link to="/orgs">
+                    <button className="btn1"type="submit">Create RSO</button>
+                </Link>
             </form>
         </body>
     )

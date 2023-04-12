@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function NewEvent() {
 
@@ -35,7 +36,9 @@ export default function NewEvent() {
                 <label className="label">Email Address: </label>
                 <input className="input" id="email" type="text"/>
                 <br/><br/>
-                <button className="btn" type="submit">Create Event</button>
+                <Link to="/dash">
+                    <button className="btn"type="submit">Create Event</button>
+                </Link>
             </form>
         </body>
     )
