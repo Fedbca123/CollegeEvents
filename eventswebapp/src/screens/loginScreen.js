@@ -34,16 +34,16 @@ const LoginScreen = () => {
         <p>Please log-in with your UserID and password</p>
         <div className="Login">
             <form>
-                <input className="input" placeholder="User ID" type="text" onChange ={handleUserId} />
+                <input className="credInput" placeholder="User ID" type="text" onChange ={handleUserId} />
                 <br/><br/>
-                <input className="input" placeholder="Password" type="password" onChange={handlePassword}/>
+                <input className="credInput" placeholder="Password" type="password" onChange={handlePassword}/>
                 <br/><br/>
                 <Link to="/events">
-                    <button type="button">Submit</button>
+                    <button className="btn" type="button">Submit</button>
                 </Link>
                 <br/><br/>
                 <Link to="/register">
-                    <button type='button'>Register</button>
+                    <button className="btn" type='button'>Register</button>
                 </Link>
             </form>
         </div>

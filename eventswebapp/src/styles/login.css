@@ -1,5 +1,5 @@
 h1 {
-    color: #873e23;
+    color: #873E23;
 }
 
 body {
@@ -8,8 +8,35 @@ body {
     background-color: '#DCCCBB';
 }
 
-.btn1 {
-    margin-right: 20px;
+.credInput {
+    background-color: #DCCCBB;
+    border: none;
+    width: 200px;
+    height: 38px;
+    border-radius: 4px;
+}
+
+.input {
+    background-color: #DCCCBB;
+    border: none;
+    width: 200px;
+    height: 30px;
+    border-radius: 4px;
+}
+
+.btn {
+    background-color: #873E23;
+    color: #DCCCBB;
+    border: none;
+    font-size: 15px;
+    width: 100px;
+    height: 32px;
+    border-radius: 7px;
+}
+
+.btn:hover {
+    background-color: #DCCCBB;
+    color: #000
 }
 
 .columnName {
@@ -121,30 +148,30 @@ body {
 
 /* Add a black background color to the top navigation */
 .topnav {
-    background-color: #873e23;
+    background-color: #873E23;
     overflow: hidden;
-  }
+}
   
   /* Style the links inside the navigation bar */
-  .topnav a {
-    color: #000;
+.topnav a {
+    color: #FFF;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
-  }
+}
   
-  /* Change the color of links on hover */
-  .topnav a:hover {
-    background-color: #DCCCBB;;
+/* Change the color of links on hover */
+.topnav a:hover {
+    background-color: #DCCCBB;
     color: black;
-  }
+}
   
-  /* Add a color to the active/current link */
-  .topnav a.active {
+/* Add a color to the active/current link
+.topnav a.active {
     background-color: #04AA6D;
     color: white;
-  }
+} */
 
 .navbarButt {
     float: left;
@@ -154,4 +181,19 @@ body {
 .logoutButt {
     float: right;
     width: 10%;
+}
+
+/* .eventInfo {
+    float: center;
+    width: 300px;
+    margin: auto;
+}
+
+.element {
+    display: flex;
+    justify-content: left;
+} */
+
+.label {
+    margin-right: 10px;
 }

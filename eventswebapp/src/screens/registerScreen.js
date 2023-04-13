@@ -42,16 +42,16 @@ const RegisterScreen = () => {
                 <input type="radio" name="userLevel" value="admin" id="admin"></input>
                 <label className="label">University Admin</label>
                 <br/><br/>
-                <label className="label">UserID: </label>
-                <input className="input" value={userId} type="text" onChange ={handleUserId} />
+                <input className="credInput" value={userId} type="text" onChange ={handleUserId} placeholder="User ID"/>
                 <br/><br/>
-                <label className="label">Password: </label>
-                <input className="input" value={password} type="password" onChange={handlePassword}/>
+                <input className="credInput" value={password} type="password" onChange={handlePassword} placeholder="Password"/>
                 <br/><br/>
-                <button className="btn1" type="submit" onClick={handleSubmit}>Submit</button>
+                <input className="credInput" value={password} type="password" onChange={handlePassword} placeholder=" Confirm Password"/>
+                <br/><br/>
+                <button className="btn" type="submit" onClick={handleSubmit}>Submit</button>
                 <br/><br/>
                 <Link to="/">
-                    <button type="button">Login</button>
+                    <button className="btn" type="button">Login</button>
                 </Link>
             </form>
         </div>

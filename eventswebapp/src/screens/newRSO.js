@@ -30,7 +30,7 @@ export default function NewRSO() {
                 <input className="input" id="mem4" type="text"/>
                 <br/><br/>
                 <Link to="/orgs">
-                    <button className="btn1"type="submit">Create RSO</button>
+                    <button className="btn"type="submit">Create RSO</button>
                 </Link>
             </form>
         </body>
