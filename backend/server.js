@@ -7,6 +7,11 @@ const mysql = require('mysql');
 const exp = require('constants');
 
 const app = express();
+
+app.use(cors());
+app.use(bodyParser.json());
+// app.use(express.json());
+
 const users = require('./routes/users');
 const events = require('./routes/events');
 const comments = require('./routes/comments');
@@ -15,17 +20,16 @@ app.use('api/users', users);
 app.use('api/events.js', events);
 app.use('api/comments.js', comments);
 
-app.use(cors());
-app.use(bodyParser.json());
 
-const connection = mysql.createConnection({
-  host: 'collegeevents.fun',
-  user: 'root',
-  password: '4710COPP',
-  database: 'COP4710'
-})
 
-connection.connect();
+// const connection = mysql.createConnection({
+//   host: 'collegeevents.fun',
+//   user: 'root',
+//   password: '4710COPP',
+//   database: 'COP4710'
+// })
+
+// connection.connect();
 
 app.use((req, res, next) => 
 {
@@ -48,4 +52,4 @@ app.listen(PORT, () =>
   console.log('Server listening on port ' + PORT);
 });
 
-connection.end();
+// connection.end();
