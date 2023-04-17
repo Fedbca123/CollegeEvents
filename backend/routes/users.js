@@ -11,11 +11,7 @@ exports.setApp = function (app, client) {
         try {
             
             const client = client.db();
-            const foundUser = await db.collection('users').findOne({ Username: username, Password: password });
-
-            let fn = '';
-            let ln = '';
-            let em = '';
+            const foundUser = await db.collection('users').findOne({ user_id: username, pass: password });
             
             var ret;
 
@@ -26,12 +22,10 @@ exports.setApp = function (app, client) {
                 return;
             }
 
-            id = foundUser._id.toString();
-            fn = foundUser.FirstName;
-            ln = foundUser.LastName;
-            em = foundUser.Email;
+            id = foundUser.user_id.toString();
+            univ_id = foundUser.univ_id;
 
-            ret = { Id: id, Username: username, FirstName: fn, LastName: ln, Email: em, error: error };
+            ret = { user_id: username, error: error };
             res.status(200).json(ret);
 
         } catch (e) {
@@ -42,41 +36,86 @@ exports.setApp = function (app, client) {
 
     //register endpoint
     app.post('/api/register', async (req, res, next) => {
-        const { firstName, lastName, username, email, password } = req.body;
+        const { username, password, univ_id, authLevel } = req.body;
 
-        const newUser = { FirstName: firstName, LastName: lastName, UserName: username, Email: email, Password: password };
+        const newUser = { UserName: username, Univ_id: univ_id, Password: password };
         let error = '';
         var ret;
 
         try {
             const db = client.db();
-            const searchUsername = await db.collection('users').findOne({ Username: username });
-            const searchEmail = await db.collection('users').findOne({ Email: email });
 
-            // check if username already in use
-            if (searchUsername) {
-                ret = { error: 'Username already exists' };
-                res.status(500).json(ret);
-                return;
-            }
+            if (authLevel === "Student") {
+                const searchUsername = await db.collection('users').findOne({ user_id: username });
 
-            // check if email already in use
-            else if (searchEmail) {
-                ret = { error: "Account already registered with this email" };
-                res.status(500).json(ret);
-                return;
-            }
+                // check if username already in use
+                if (searchUsername) {
+                    ret = { error: 'Username already exists' };
+                    res.status(500).json(ret);
+                    return;
+                }
 
-            // else create new user
-            else {
-                db.collection('users').insertOne(newUser);
+                // check if email already in use
+                // else if (searchEmail) {
+                //     ret = { error: "Account already registered with this email" };
+                //     res.status(500).json(ret);
+                //     return;
+                // }
+
+                // else create new user
+                else {
+                    db.collection('Student').insertOne(newUser);
+                }
+            } else if (authLevel === "Admin") {
+                const searchUsername = await db.collection('users').findOne({ user_id: username });
+
+                // check if username already in use
+                if (searchUsername) {
+                    ret = { error: 'Username already exists' };
+                    res.status(500).json(ret);
+                    return;
+                }
+
+                // check if email already in use
+                // else if (searchEmail) {
+                //     ret = { error: "Account already registered with this email" };
+                //     res.status(500).json(ret);
+                //     return;
+                // }
+
+                // else create new user
+                else {
+                    db.collection('Admin').insertOne(newUser);
+                }
+            } else {
+                const searchUsername = await db.collection('users').findOne({ user_id: username });
+
+                // check if username already in use
+                if (searchUsername) {
+                    ret = { error: 'Username already exists' };
+                    res.status(500).json(ret);
+                    return;
+                }
+
+                // check if email already in use
+                // else if (searchEmail) {
+                //     ret = { error: "Account already registered with this email" };
+                //     res.status(500).json(ret);
+                //     return;
+                // }
+
+                // else create new user
+                else {
+                    db.collection('Super Admin').insertOne(newUser);
+                }
             }
+            
         }
         catch (e) {
             error = e.toString();
         }
 
-        ret = {FirstName: firstName, LastName: lastName, Username: username, Email: email, Password: password, error: error};
+        ret = { Username: username, Univ_id: univ_id, Password: password, error: error };
         res.status(200).json(ret);
      });
 }

@@ -7,7 +7,16 @@ const mysql = require('mysql');
 const exp = require('constants');
 
 const app = express();
+const users = require('./routes/users');
+const events = require('./routes/events');
+const comments = require('./routes/comments');
 
+app.use('api/users', users);
+app.use('api/events.js', events);
+app.use('api/comments.js', comments);
+
+app.use(cors());
+app.use(bodyParser.json());
 
 const connection = mysql.createConnection({
   host: 'collegeevents.fun',
@@ -17,15 +26,6 @@ const connection = mysql.createConnection({
 })
 
 connection.connect();
-
-connection.query('SELECT 1 + 1 AS solution', (err, rows, fields) => {
-    if (err) throw err;
-
-    console.log('The solution is: ', rows[0].solution);
-})
-
-app.use(cors());
-app.use(bodyParser.json());
 
 app.use((req, res, next) => 
 {
@@ -41,9 +41,11 @@ app.use((req, res, next) =>
   next();
 });
 
-// app.listen(PORT, () => 
-// {
-//   console.log('Server listening on port ' + PORT);
-// });
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => 
+{
+  console.log('Server listening on port ' + PORT);
+});
 
 connection.end();
