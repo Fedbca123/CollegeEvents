@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function openForm() {
@@ -18,8 +18,8 @@ function getEvents() {
     })
     .then(data => {
         data.forEach(user => {
-            const markup = `<li>${user.name}</li>`;
-            document.querySelector('ul').insertAdjacentHTML('beforeend', markup);
+            const markup = `<p className="event">${user.name}<button>&#9734;</button></p>`;
+            document.querySelector('ul').innerHTML += markup;
         });
     })
     .catch(error => console.log(error));
@@ -75,7 +75,6 @@ export default function Events() {
                 <div className="columnName">Public
                     <div className="card">
                         <ul>
-                        
                         </ul>
                     </div>
                 </div>
