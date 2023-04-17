@@ -11,10 +11,25 @@ function closeForm() {
     console.log("Close");
 }
 
+function getEvents() {
+    fetch('https://jsonplaceholder.typicode.com/users')
+    .then(res => {
+        return res.json();
+    })
+    .then(data => {
+        data.forEach(user => {
+            const markup = `<li>${user.name}</li>`;
+            document.querySelector('ul').insertAdjacentHTML('beforeend', markup);
+        });
+    })
+    .catch(error => console.log(error));
+}
+
 export default function Events() {
+    getEvents();
     return (
         <body>
-            <div class="topnav">
+            <div className="topnav">
                 <Link to="/events" className="navbarButt">All Events</Link>
                 <Link to="/orgs" className="navbarButt">All RSOs</Link>
                 <Link to="/" className="logoutButt">Log out</Link>
@@ -59,7 +74,9 @@ export default function Events() {
             <div className="row">
                 <div className="columnName">Public
                     <div className="card">
-                        Hello
+                        <ul>
+                        
+                        </ul>
                     </div>
                 </div>
                 <div className="columnName">Private

@@ -5,7 +5,7 @@ export default function NewEvent() {
 
     return (
         <body>
-            <div class="topnav">
+            <div className="topnav">
                 <Link to="/events" className="navbarButt">All Events</Link>
                 <Link to="/orgs" className="navbarButt">All RSOs</Link>
                 <Link to="/" className="logoutButt">Log out</Link>
