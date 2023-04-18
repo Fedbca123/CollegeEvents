@@ -31,14 +31,14 @@ router.post('/register', (req, res) => {
             }
             console.log(result);
             
-            sql = 'SELECT * FROM Users WHERE user_id =  ?';
-            pool.query(sql, user_id, (err, result) => {
-                if (err) {
-                    return res.send(err);
-                }
+            // sql = 'SELECT * FROM Users WHERE user_id =  ?';
+            // pool.query(sql, user_id, (err, result) => {
+            //     if (err) {
+            //         return res.send(err);
+            //     }
 
-                console.log(result);
-            });
+            //     console.log(result);
+            // });
         }); 
     } else if (authlevel === 1) {
         let sql = 'INSERT INTO Admin(user_id, pass, univ_id) VALUES (?, ?, ?)';
@@ -54,14 +54,14 @@ router.post('/register', (req, res) => {
             }
             console.log(result);
             
-            sql = 'SELECT * FROM Users WHERE user_id =  ?';
-            pool.query(sql, user_id, (err, result) => {
-                if (err) {
-                    return res.send(err);
-                }
+            // sql = 'SELECT * FROM Users WHERE user_id =  ?';
+            // pool.query(sql, user_id, (err, result) => {
+            //     if (err) {
+            //         return res.send(err);
+            //     }
 
-                console.log(result);
-            });
+            //     console.log(result);
+            // });
         }); 
     } else {
         let sql = 'INSERT INTO Super Admin(user_id, pass, univ_id) VALUES (?, ?, ?)';
@@ -77,14 +77,14 @@ router.post('/register', (req, res) => {
             }
             console.log(result);
             
-            sql = 'SELECT * FROM Users WHERE user_id =  ?';
-            pool.query(sql, user_id, (err, result) => {
-                if (err) {
-                    return res.send(err);
-                }
+            // sql = 'SELECT * FROM Users WHERE user_id =  ?';
+            // pool.query(sql, user_id, (err, result) => {
+            //     if (err) {
+            //         return res.send(err);
+            //     }
 
-                console.log(result);
-            });
+            //     console.log(result);
+            // });
         }); 
     }
     
