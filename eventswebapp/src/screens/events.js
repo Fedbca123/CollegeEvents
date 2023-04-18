@@ -26,7 +26,7 @@ function getEvents() {
 }
 
 export default function Events() {
-    getEvents();
+    //getEvents();
     return (
         <body>
             <div className="topnav">
@@ -74,18 +74,23 @@ export default function Events() {
             <div className="row">
                 <div className="columnName">Public
                     <div className="card">
-                        <ul>
-                        </ul>
+                        <p>Knight-Thon</p>
+                        <p>Relay for Life</p>
+                        <p>What in Tarnation Knight Nation</p>
                     </div>
                 </div>
                 <div className="columnName">Private
-                    <div className="card"></div>
+                    <div className="card">
+                        <p>Senior Bash</p>
+                        <p>Hackathon</p>
+                    </div>
                 </div>
                 <div className="columnName">RSO
-                    <div className="card"></div>
-                </div>
-                <div className="columnName">Favorites
-                    <div className="card"></div>
+                    <div className="card">
+                        <p>Scrimmage with UF</p>
+                        <p>Hatter</p>
+                        <p>Zoo volunteering</p>
+                    </div>
                 </div>
             </div>
         </body>
