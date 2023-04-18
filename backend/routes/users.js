@@ -111,9 +111,9 @@ router.post('/login', (req, res) => {
             return res.send(err);
         }
 
-        if (Object.keys(result).length == 0) {
-            return res.status(400).json({ msg: "Username not found" });
-        }
+        // if (Object.keys(result).length !== 1) {
+        //     return res.status(400).json({ msg: "Username not found" });
+        // }
 
         if (result[0].password != pass) {
             return res.status(400).json({ msg: "Invalid Username/Password" });
