@@ -128,12 +128,14 @@ router.post('/login', (req, res) => {
         return res.status(420).json({ msg: 'Please enter all fields' });
     }
 
+    let sql = 'SELECT * FROM Users WHERE user_id =  ?';  
+
     if (authlevel === 0) {
-        let sql = 'SELECT * FROM Students WHERE user_id =  ?';        
+        sql = 'SELECT * FROM Students WHERE user_id =  ?';        
     } else if (authlevel === 1) {
-        let sql = 'SELECT * FROM Admin WHERE user_id =  ?'; 
+        sql = 'SELECT * FROM Admin WHERE user_id =  ?'; 
     } else {
-        let sql = 'SELECT * FROM Super Admin WHERE user_id =  ?'; 
+        sql = 'SELECT * FROM Super Admin WHERE user_id =  ?'; 
     }
 
     pool.query(sql, user_id, (err, result) => {
