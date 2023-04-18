@@ -86,7 +86,7 @@ router.post('/register', (req, res) => {
             
         }); 
     } else {
-        let sql = 'INSERT INTO Super Admin(user_id, pass, univ_id) VALUES (?, ?, ?)';
+        let sql = 'INSERT INTO super_admin(user_id, pass, univ_id) VALUES (?, ?, ?)';
 
         pool.query(sql, [user_id, pass, univ_id], (err, result) => {
 
@@ -101,7 +101,7 @@ router.post('/register', (req, res) => {
 
             // return res.status(200).send(result);
 
-            sql = 'SELECT * FROM Super Admin WHERE user_id =  ?';
+            sql = 'SELECT * FROM super_admin WHERE user_id =  ?';
             pool.query(sql, user_id, (err, result) => {
                 if (err) {
                     return res.send(err);
@@ -168,7 +168,7 @@ router.post('/login', (req, res) => {
     } else if (authlevel === 1) {
         sql = 'SELECT * FROM Admin WHERE user_id =  ?'; 
     } else {
-        sql = 'SELECT * FROM Super Admin WHERE user_id =  ?'; 
+        sql = 'SELECT * FROM super_admin WHERE user_id =  ?'; 
     }
 
     pool.query(sql, user_id, (err, result) => {
