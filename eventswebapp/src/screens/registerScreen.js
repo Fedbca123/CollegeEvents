@@ -42,7 +42,7 @@ const RegisterScreen = () => {
     }
 
     function registerUser() {
-        let obj = {user_id: userId, pass: password, univ_id: 1, authlevel: level};
+        let obj = {user_id: userID.value, pass: loginPassword.value, univ_id: 1, authlevel: authLevel.value};
         let js = JSON.stringify(obj);
 
         fetch(buildPath('register'), {method: 'POST', body: js, headers: {'Content-Type': 'application/json'}})
@@ -58,14 +58,14 @@ const RegisterScreen = () => {
         <p>Please identify your user level and register with a UserID and password</p>
         <div className="Register">
             <form>
-                <input type="radio" name="userLevel" value={level}id="student"></input>
+                <input type="radio" name="userLevel" id="0" ref={(c) => authLevel = c}></input>
                 <label className="label">Student</label>
-                <input type="radio" name="userLevel" value={level} id="admin"></input>
+                <input type="radio" name="userLevel" id="2" ref={(c) => authLevel = c}></input>
                 <label className="label">University Admin</label>
                 <br/><br/>
-                <input className="credInput" value={userId} type="text" onChange ={handleUserId} placeholder="User ID"/>
+                <input className="credInput" type="text" id="userID" onChange ={handleUserId} placeholder="User ID" ref={(c) => userID = c}/>
                 <br/><br/>
-                <input className="credInput" value={password} type="password" onChange={handlePassword} placeholder="Password"/>
+                <input className="credInput" type="password" id="loginPassword"onChange={handlePassword} placeholder="Password" ref={(c) => loginPassword = c}/>
                 <br/><br/>
                 <button className="btn" type="submit" onClick={registerUser()}>Submit</button>
                 <br/><br/>
