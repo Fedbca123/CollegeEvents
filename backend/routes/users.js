@@ -98,7 +98,7 @@ router.post('/login', (req, res) => {
         return res.status(420).json({ msg: 'Please enter all fields' });
     }
 
-    let sql = 'SELECT * FROM Users WHERE username = ?';
+    let sql = 'SELECT * FROM Users WHERE user_id = ?';
 
     pool.query(sql, user_id, (err, result) => {
         if (err) {
