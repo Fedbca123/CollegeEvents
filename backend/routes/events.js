@@ -45,7 +45,7 @@ router.post('/private', (req, res) => {
 
 //loads public, private, and RSO events
 //access private
-router.post('/rso', auth, (req, res) => {
+router.post('/rso', (req, res) => {
     const { username, univ_id } = req.body;
 
     let sql = '';
