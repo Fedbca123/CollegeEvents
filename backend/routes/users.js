@@ -81,16 +81,24 @@ router.post('/register', (req, res) => {
             }
             console.log(result);
 
-            return res.status(200).send(result);
+            // return res.status(200).send(result);
             
-            // sql = 'SELECT * FROM Users WHERE user_id =  ?';
-            // pool.query(sql, user_id, (err, result) => {
-            //     if (err) {
-            //         return res.send(err);
-            //     }
+            sql = 'SELECT * FROM Users WHERE user_id =  ?';
+            pool.query(sql, user_id, (err, result) => {
+                if (err) {
+                    return res.send(err);
+                }
 
-            //     console.log(result);
-            // });
+                const user = ({
+                    "username": result[0].user_id,
+                    // "authlevel": result[0].authlevel,
+                    "university": result[0].univ_id,
+                    "pass":result[0].pass
+                })
+                console.log(user);
+
+                return res.status(200).send(user);
+            });
         }); 
     }
     
