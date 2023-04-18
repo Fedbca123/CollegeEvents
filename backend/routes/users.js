@@ -2,16 +2,16 @@ const express = require('express');
 const router = express.Router();
 const mySql = require('mysql');
 
-const db = mySql.createConnection({
-  host: 'collegeevents.fun',
-  user: 'root',
-  password: '4710COPP',
-  database: 'COP4710'
+const pool = mySql.createPool({
+    host: 'localhost',
+    user: 'root',
+    password: '4710COPP',
+    database: 'COP4710'
 })
 
 router.post('/register', (req, res) => {
 
-    const { username, password, univ_id, authLevel } = req.body;
+    const { username, password, univ_id } = req.body;
 
     if (!username || !password || !univ_id) {
         return res.status(420).json({ error: "Please enter all fields" });
@@ -20,21 +20,25 @@ router.post('/register', (req, res) => {
     // let sql = 'INSERT INTO users(username, password, auth_level, Users_university_id, university_name) VALUES (?, ?, ?, ?, ?)';
     let sql = 'INSERT INTO Student(username, password, univ_id) VALUES (?, ?, ?, ?)';
 
-    db.query(sql, [username, password, univ_id], (err, result) => {
+    pool.query(sql, [username, password, univ_id], (err, result) => {
 
         if (err) {
             if (err.code == "ER_DUP_ENTRY") {
                 return res.status(400).json({ msg: 'Username already exists'}); 
             }
+            err.msg = "MySQL Error";
             return res.status(400).send(err);
         }
+        console.log(result);
         
-        // sql = 'SELECT * FROM users WHERE username =  ?';
-        // db.query(sql, username, (err, result) => {
-        //     if (err) {
-        //         return res.send(err);
-        //     }
-        // });
+        sql = 'SELECT * FROM users WHERE username =  ?';
+        pool.query(sql, username, (err, result) => {
+            if (err) {
+                return res.send(err);
+            }
+
+            console.log(result);
+        });
     })
 
 })
