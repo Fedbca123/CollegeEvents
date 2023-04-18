@@ -29,7 +29,7 @@ router.post('/register', (req, res) => {
                 err.msg = "MySQL Error";
                 return res.status(400).send(err);
             }
-            console.log(result);
+            console.log(result[0]);
             
             // sql = 'SELECT * FROM Users WHERE user_id =  ?';
             // pool.query(sql, user_id, (err, result) => {
