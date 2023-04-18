@@ -104,16 +104,16 @@ router.post('/login', (req, res) => {
         return res.status(420).json({ msg: 'Please enter all fields' });
     }
 
-    let sql = 'SELECT * FROM Users WHERE user_id = ?';
+    let sql = 'SELECT * FROM Users WHERE user_id =  ?';
 
     pool.query(sql, user_id, (err, result) => {
         if (err) {
             return res.send(err);
         }
 
-        // if (Object.keys(result).length !== 1) {
-        //     return res.status(400).json({ msg: "Username not found" });
-        // }
+        if (Object.keys(result).length !== 1) {
+            return res.status(400).json({ msg: "Username not found" });
+        }
 
         if (result[0].pass != pass) {
             return res.status(400).json({ msg: "Invalid Username/Password" });
