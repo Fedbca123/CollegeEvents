@@ -11,16 +11,16 @@ const pool = mySql.createPool({
 
 router.post('/register', (req, res) => {
 
-    const { username, password, univ_id } = req.body;
+    const { user_id, pass, univ_id } = req.body;
 
-    if (!username || !password || !univ_id) {
+    if (!user_id || !pass || !univ_id) {
         return res.status(420).json({ error: "Please enter all fields" });
     }
 
     // let sql = 'INSERT INTO users(username, password, auth_level, Users_university_id, university_name) VALUES (?, ?, ?, ?, ?)';
     let sql = 'INSERT INTO Student(username, password, univ_id) VALUES (?, ?, ?)';
 
-    pool.query(sql, [username, password, univ_id], (err, result) => {
+    pool.query(sql, [user_id, pass, univ_id], (err, result) => {
 
         if (err) {
             if (err.code == "ER_DUP_ENTRY") {
@@ -32,7 +32,7 @@ router.post('/register', (req, res) => {
         console.log(result);
         
         sql = 'SELECT * FROM users WHERE username =  ?';
-        pool.query(sql, username, (err, result) => {
+        pool.query(sql, user_id, (err, result) => {
             if (err) {
                 return res.send(err);
             }
