@@ -115,7 +115,7 @@ router.post('/login', (req, res) => {
         //     return res.status(400).json({ msg: "Username not found" });
         // }
 
-        if (result[0].password != pass) {
+        if (result[0].pass != pass) {
             return res.status(400).json({ msg: "Invalid Username/Password" });
         }
 
