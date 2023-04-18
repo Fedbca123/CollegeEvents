@@ -33,7 +33,7 @@ router.post('/register', (req, res) => {
 
             // return res.status(200).send(result);
             
-            sql = 'SELECT * FROM Users WHERE user_id =  ?';
+            sql = 'SELECT * FROM Students WHERE user_id =  ?';
             pool.query(sql, user_id, (err, result) => {
                 if (err) {
                     return res.send(err);
@@ -66,7 +66,7 @@ router.post('/register', (req, res) => {
 
             // return res.status(200).send(result);
             
-            sql = 'SELECT * FROM Users WHERE user_id =  ?';
+            sql = 'SELECT * FROM Admin WHERE user_id =  ?';
             pool.query(sql, user_id, (err, result) => {
                 if (err) {
                     return res.send(err);
@@ -99,7 +99,7 @@ router.post('/register', (req, res) => {
 
             // return res.status(200).send(result);
             
-            sql = 'SELECT * FROM Users WHERE user_id =  ?';
+            sql = 'SELECT * FROM Super Admin WHERE user_id =  ?';
             pool.query(sql, user_id, (err, result) => {
                 if (err) {
                     return res.send(err);
