@@ -33,7 +33,7 @@ router.post('/register', (req, res) => {
 
             // return res.status(200).send(result);
             
-            sql = 'SELECT * FROM Students WHERE user_id =  ?';
+            sql = 'SELECT * FROM Student WHERE user_id =  ?';
             pool.query(sql, user_id, (err, result) => {
                 if (err) {
                     return res.send(err);
@@ -131,7 +131,7 @@ router.post('/login', (req, res) => {
     let sql = 'SELECT * FROM Users WHERE user_id =  ?';  
 
     if (authlevel === 0) {
-        sql = 'SELECT * FROM Students WHERE user_id =  ?';        
+        sql = 'SELECT * FROM Student WHERE user_id =  ?';        
     } else if (authlevel === 1) {
         sql = 'SELECT * FROM Admin WHERE user_id =  ?'; 
     } else {
