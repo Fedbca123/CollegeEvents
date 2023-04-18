@@ -92,15 +92,15 @@ router.post('/register', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-    const { username, password } = req.body;
+    const { user_id, pass } = req.body;
 
-    if (!username || !password) {
+    if (!user_id || !pass) {
         return res.status(420).json({ msg: 'Please enter all fields' });
     }
 
-    let sql = 'SELECT * FROM users WHERE username = ?';
+    let sql = 'SELECT * FROM Users WHERE username = ?';
 
-    pool.query(sql, username, (err, result) => {
+    pool.query(sql, user_id, (err, result) => {
         if (err) {
             return res.send(err);
         }
@@ -109,17 +109,21 @@ router.post('/login', (req, res) => {
             return res.status(400).json({ msg: "Username not found" });
         }
 
-        if (result[0].password != password) {
+        if (result[0].password != pass) {
             return res.status(400).json({ msg: "Invalid Username/Password" });
         }
 
         const user = ({
             "username": result[0].user_id,
-            "authlevel": result[0].authlevel,
+            // "authlevel": result[0].authlevel,
             "university": result[0].univ_id,
         });
-    })
-})
+
+        console.log(user);
+
+        return res.status(200).json({ msg: "Login successful", user: user });
+    });
+});
 
 module.exports = router;
 // exports.setApp = function (app, client) {
