@@ -31,7 +31,7 @@ router.post('/register', (req, res) => {
             }
             console.log(result);
             
-            sql = 'SELECT * FROM Users WHERE usern_id =  ?';
+            sql = 'SELECT * FROM Users WHERE user_id =  ?';
             pool.query(sql, user_id, (err, result) => {
                 if (err) {
                     return res.send(err);
@@ -77,7 +77,7 @@ router.post('/register', (req, res) => {
             }
             console.log(result);
             
-            sql = 'SELECT * FROM Users WHERE usern_id =  ?';
+            sql = 'SELECT * FROM Users WHERE user_id =  ?';
             pool.query(sql, user_id, (err, result) => {
                 if (err) {
                     return res.send(err);
