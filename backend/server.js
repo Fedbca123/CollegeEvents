@@ -20,17 +20,6 @@ app.use('/api/users', users);
 app.use('/api/events', events);
 app.use('/api/comments', comments);
 
-
-
-// const connection = mysql.createConnection({
-//   host: 'collegeevents.fun',
-//   user: 'root',
-//   password: '4710COPP',
-//   database: 'COP4710'
-// })
-
-// connection.connect();
-
 // app.use((req, res, next) => 
 // {
 //   res.setHeader('Access-Control-Allow-Origin', '*');

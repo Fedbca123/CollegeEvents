@@ -7,7 +7,7 @@ const pool = mySql.createPool({
     user: 'root',
     password: '4710COPP',
     database: 'COP4710'
-})
+});
 
 router.post('/register', (req, res) => {
 
@@ -18,13 +18,13 @@ router.post('/register', (req, res) => {
     }
 
     // let sql = 'INSERT INTO users(username, password, auth_level, Users_university_id, university_name) VALUES (?, ?, ?, ?, ?)';
-    let sql = 'INSERT INTO Student(username, password, univ_id) VALUES (?, ?, ?, ?)';
+    let sql = 'INSERT INTO Student(username, password, univ_id) VALUES (?, ?, ?)';
 
     pool.query(sql, [username, password, univ_id], (err, result) => {
 
         if (err) {
             if (err.code == "ER_DUP_ENTRY") {
-                return res.status(400).json({ msg: 'Username already exists'}); 
+                return res.status(400).json({ msg: 'Username already exists' });
             }
             err.msg = "MySQL Error";
             return res.status(400).send(err);
@@ -41,6 +41,36 @@ router.post('/register', (req, res) => {
         });
     })
 
+});
+
+router.post('/login', (req, res) => {
+    const { username, password } = req.body;
+
+    if (!username || !password) {
+        return res.status(420).json({ msg: 'Please enter all fields' });
+    }
+
+    let sql = 'SELECT * FROM users WHERE username = ?';
+
+    pool.query(sql, username, (err, result) => {
+        if (err) {
+            return res.send(err);
+        }
+
+        if (Object.keys(result).length !== 1) {
+            return res.status(400).json({ msg: "Username not found" });
+        }
+
+        if (result[0].password != password) {
+            return res.status(400).json({ msg: "Invalid Username/Password" });
+        }
+
+        const user = ({
+            "username": result[0].user_id,
+            "authlevel": result[0].authlevel,
+            "university": result[0].univ_id,
+        });
+    })
 })
 
 module.exports = router;
