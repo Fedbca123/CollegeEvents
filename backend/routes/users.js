@@ -32,6 +32,23 @@ router.post('/register', (req, res) => {
              console.log(result);
 
             // return res.status(200).send(result);
+
+            // sql = 'SELECT * FROM Student WHERE user_id =  ?';
+            // pool.query(sql, user_id, (err, result) => {
+            //     if (err) {
+            //         return res.send(err);
+            //     }
+
+            //     const user = ({
+            //         "username": result[0].user_id,
+            //         // "authlevel": result[0].authlevel,
+            //         "university": result[0].univ_id,
+            //         "pass":result[0].pass
+            //     })
+            //     console.log(user);
+
+            //     return res.status(200).send(user);
+            // });
             
         }); 
     } else if (authlevel === 1) {
@@ -49,10 +66,27 @@ router.post('/register', (req, res) => {
              console.log(result);
 
             // return res.status(200).send(result);
+
+            // sql = 'SELECT * FROM Admin WHERE user_id =  ?';
+            // pool.query(sql, user_id, (err, result) => {
+            //     if (err) {
+            //         return res.send(err);
+            //     }
+
+            //     const user = ({
+            //         "username": result[0].user_id,
+            //         // "authlevel": result[0].authlevel,
+            //         "university": result[0].univ_id,
+            //         "pass":result[0].pass
+            //     })
+            //     console.log(user);
+
+            //     return res.status(200).send(user);
+            // });
             
         }); 
     } else {
-        let sql = 'INSERT INTO Super Admin(user_id, pass, univ_id) VALUES (?, ?, ?)';
+        let sql = 'INSERT INTO super_admin(user_id, pass, univ_id) VALUES (?, ?, ?)';
 
         pool.query(sql, [user_id, pass, univ_id], (err, result) => {
 
@@ -66,41 +100,58 @@ router.post('/register', (req, res) => {
             console.log(result);
 
             // return res.status(200).send(result);
+
+            // sql = 'SELECT * FROM super_admin WHERE user_id =  ?';
+            // pool.query(sql, user_id, (err, result) => {
+            //     if (err) {
+            //         return res.send(err);
+            //     }
+
+            //     const user = ({
+            //         "username": result[0].user_id,
+            //         // "authlevel": result[0].authlevel,
+            //         "university": result[0].univ_id,
+            //         "pass":result[0].pass
+            //     })
+            //     console.log(user);
+
+            //     return res.status(200).send(user);
+            // });
         
         }); 
     };
 
 
-    // sql = 'INSERT INTO Users(user_id, pass, univ_id, authlevel) VALUES (?, ?, ?, ?)';
+    sql = 'INSERT INTO Users(user_id, pass, univ_id, authlevel) VALUES (?, ?, ?, ?)';
 
-    //     pool.query(sql, [user_id, pass, univ_id, authlevel], (err, result) => {
+        pool.query(sql, [user_id, pass, univ_id, authlevel], (err, result) => {
             
-    //         if (err) {
-    //             if (err.code == "ER_DUP_ENTRY") {
-    //             return res.status(400).json({ msg: 'Username already exists' });
-    //         }
-    //             err.msg = "MySQL Error";
-    //             return res.status(400).send(err);
-    //         }
-    //     });
+            if (err) {
+                if (err.code == "ER_DUP_ENTRY") {
+                return res.status(400).json({ msg: 'Username already exists' });
+            }
+                err.msg = "MySQL Error";
+                return res.status(400).send(err);
+            }
+
+            sql = 'SELECT * FROM Users WHERE user_id =  ?';
+                pool.query(sql, user_id, (err, result) => {
+                    if (err) {
+                        return res.send(err);
+                    }
+
+                    const user = ({
+                        "username": result[0].user_id,
+                        "authlevel": result[0].authlevel,
+                        "university": result[0].univ_id,
+                        "pass":result[0].pass
+                    })
+                    console.log(user);
+
+                    return res.status(200).send(user);
+                });
+        });
     
-
-    // sql = 'SELECT * FROM Users WHERE user_id =  ?';
-    //     pool.query(sql, user_id, (err, result) => {
-    //         if (err) {
-    //             return res.send(err);
-    //         }
-
-    //         const user = ({
-    //             "username": result[0].user_id,
-    //             "authlevel": result[0].authlevel,
-    //             "university": result[0].univ_id,
-    //             "pass":result[0].pass
-    //         })
-    //         console.log(user);
-
-    //         return res.status(200).send(user);
-    //     });
 });
 
 router.post('/login', (req, res) => {
@@ -117,7 +168,7 @@ router.post('/login', (req, res) => {
     // } else if (authlevel === 1) {
     //     sql = 'SELECT * FROM Admin WHERE user_id =  ?'; 
     // } else {
-    //     sql = 'SELECT * FROM Super Admin WHERE user_id =  ?'; 
+    //     sql = 'SELECT * FROM super_admin WHERE user_id =  ?'; 
     // }
 
     pool.query(sql, user_id, (err, result) => {
