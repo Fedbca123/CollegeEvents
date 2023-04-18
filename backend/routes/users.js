@@ -124,7 +124,7 @@ router.post('/register', (req, res) => {
 router.post('/login', (req, res) => {
     const { user_id, pass, authlevel } = req.body;
 
-    if (!user_id || !pass || !authlevel) {
+    if (!user_id || !pass || authlevel == undefined) {
         return res.status(420).json({ msg: 'Please enter all fields' });
     }
 
