@@ -11,35 +11,83 @@ const pool = mySql.createPool({
 
 router.post('/register', (req, res) => {
 
-    const { user_id, pass, univ_id } = req.body;
+    const { user_id, pass, univ_id, authlevel } = req.body;
 
     if (!user_id || !pass || !univ_id) {
         return res.status(420).json({ error: "Please enter all fields" });
     }
 
-    // let sql = 'INSERT INTO users(username, password, auth_level, Users_university_id, university_name) VALUES (?, ?, ?, ?, ?)';
-    let sql = 'INSERT INTO Student(user_id, pass, univ_id) VALUES (?, ?, ?)';
+    if (authlevel === 0) {
+        let sql = 'INSERT INTO Student(user_id, pass, univ_id) VALUES (?, ?, ?)';
 
-    pool.query(sql, [user_id, pass, univ_id], (err, result) => {
+        pool.query(sql, [user_id, pass, univ_id], (err, result) => {
 
-        if (err) {
-            if (err.code == "ER_DUP_ENTRY") {
-                return res.status(400).json({ msg: 'Username already exists' });
-            }
-            err.msg = "MySQL Error";
-            return res.status(400).send(err);
-        }
-        console.log(result);
-        
-        sql = 'SELECT * FROM users WHERE username =  ?';
-        pool.query(sql, user_id, (err, result) => {
             if (err) {
-                return res.send(err);
+                if (err.code == "ER_DUP_ENTRY") {
+                    return res.status(400).json({ msg: 'Username already exists' });
+                }
+                err.msg = "MySQL Error";
+                return res.status(400).send(err);
             }
-
             console.log(result);
-        });
-    })
+            
+            sql = 'SELECT * FROM Users WHERE username =  ?';
+            pool.query(sql, user_id, (err, result) => {
+                if (err) {
+                    return res.send(err);
+                }
+
+                console.log(result);
+            });
+        }); 
+    } else if (authlevel === 1) {
+        let sql = 'INSERT INTO Admin(user_id, pass, univ_id) VALUES (?, ?, ?)';
+
+        pool.query(sql, [user_id, pass, univ_id], (err, result) => {
+
+            if (err) {
+                if (err.code == "ER_DUP_ENTRY") {
+                    return res.status(400).json({ msg: 'Username already exists' });
+                }
+                err.msg = "MySQL Error";
+                return res.status(400).send(err);
+            }
+            console.log(result);
+            
+            sql = 'SELECT * FROM Users WHERE username =  ?';
+            pool.query(sql, user_id, (err, result) => {
+                if (err) {
+                    return res.send(err);
+                }
+
+                console.log(result);
+            });
+        }); 
+    } else {
+        let sql = 'INSERT INTO Super Admin(user_id, pass, univ_id) VALUES (?, ?, ?)';
+
+        pool.query(sql, [user_id, pass, univ_id], (err, result) => {
+
+            if (err) {
+                if (err.code == "ER_DUP_ENTRY") {
+                    return res.status(400).json({ msg: 'Username already exists' });
+                }
+                err.msg = "MySQL Error";
+                return res.status(400).send(err);
+            }
+            console.log(result);
+            
+            sql = 'SELECT * FROM Users WHERE username =  ?';
+            pool.query(sql, user_id, (err, result) => {
+                if (err) {
+                    return res.send(err);
+                }
+
+                console.log(result);
+            });
+        }); 
+    }
+    
 
 });
 
