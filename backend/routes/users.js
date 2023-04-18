@@ -29,7 +29,9 @@ router.post('/register', (req, res) => {
                 err.msg = "MySQL Error";
                 return res.status(400).send(err);
             }
-            console.log(result[0]);
+            console.log(result);
+
+            return res.status(200).send(result);
             
             // sql = 'SELECT * FROM Users WHERE user_id =  ?';
             // pool.query(sql, user_id, (err, result) => {
@@ -53,6 +55,8 @@ router.post('/register', (req, res) => {
                 return res.status(400).send(err);
             }
             console.log(result);
+
+            return res.status(200).send(result);
             
             // sql = 'SELECT * FROM Users WHERE user_id =  ?';
             // pool.query(sql, user_id, (err, result) => {
@@ -76,6 +80,8 @@ router.post('/register', (req, res) => {
                 return res.status(400).send(err);
             }
             console.log(result);
+
+            return res.status(200).send(result);
             
             // sql = 'SELECT * FROM Users WHERE user_id =  ?';
             // pool.query(sql, user_id, (err, result) => {
