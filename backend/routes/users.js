@@ -18,7 +18,7 @@ router.post('/register', (req, res) => {
     }
 
     // let sql = 'INSERT INTO users(username, password, auth_level, Users_university_id, university_name) VALUES (?, ?, ?, ?, ?)';
-    let sql = 'INSERT INTO Student(username, password, univ_id) VALUES (?, ?, ?)';
+    let sql = 'INSERT INTO Student(user_id, pass, univ_id) VALUES (?, ?, ?)';
 
     pool.query(sql, [user_id, pass, univ_id], (err, result) => {
 
