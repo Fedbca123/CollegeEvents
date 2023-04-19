@@ -53,7 +53,6 @@ export default function StudentOrgs () {
                         <p>Men's Rugby <button>Join</button></p>
                         <p>Running Club <button>Join</button></p>
                         <p>Bookworms <button>Join</button></p>
-                        <p>ESports <button>Join</button></p>
                     </div>
                 </div>
             </div>
