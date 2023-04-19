@@ -207,7 +207,7 @@ router.post('/addLocation', (req, res) => {
 
     let sql = 'INSERT INTO Location (location_id, name, lat, long) VALUES (?, ?, ?, ?)';
 
-    pool.query(sql, [location_id, name, lat, long], (req, res) => {
+    pool.query(sql, [location_id, name, lat, long], (err, res) => {
         
             if (err) {
                 return res.status(400).send(err);
@@ -215,7 +215,7 @@ router.post('/addLocation', (req, res) => {
 
             sql = 'SELECT * FROM Location WHERE name = ?';
 
-            pool.query(sql, [name], (req, result) => { 
+            pool.query(sql, [name], (err, result) => { 
 
                 const locations = [];
 
