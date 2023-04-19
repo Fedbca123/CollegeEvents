@@ -111,18 +111,43 @@ router.post('/private', (req, res) => {
 
 //loads public, private, and RSO events
 //access private
-router.post('/rso', (req, res) => {
-    const { username, univ_id } = req.body;
+router.post('/CreateRSO', (req, res) => {
+    const { admin_id, RSO_id } = req.body;
 
-    let sql = 'SELECT idEvent,  rsos.name, rsos.idRSO, events.name AS eventName, events.approved, Events_university_id, events.status, category, description, time, events.date, location, phone, email, rating, numRatings, scoreRatings, RSO_Member_user_id FROM events INNER JOIN rso_members ON events.Events_RSO_id = rso_members.RSO_member_RSO_id AND RSO_Member_user_id = ? INNER JOIN rsos ON events.Events_RSO_id = rsos.idRSO AND Events_university_id = ? AND events.approved = 1 GROUP BY idEvent UNION SELECT idEvent,  rsos.name, rsos.idRSO, events.name AS eventName, events.approved, Events_university_id, events.status, category, description, time, events.date, location, phone, email, rating, numRatings, scoreRatings, RSO_Member_user_id FROM events, rso_members, rsos WHERE events.Events_RSO_id = rsos.idRSO AND (events.Events_university_id = ? AND events.approved = 1 AND events.status = "public") GROUP BY idEvent';
+    let sql = 'INSERT INTO RSO (RSO_id, admin_id) VALUES (?, ?)';
 
-    pool.query(sql, [username, univ_id, univ_id], (err, result) => {
+    pool.query(sql, [RSO_id, admin_id], (err, result) => {
         if (err) {
             return res.status(400).send(err);
         }
 
-        res.json(result);
-    })
+        sql = 'SELECT * FROM RSO WHERE RSO_id = ?'
+
+        pool.query(sql, [RSO_id], (err, result) => {
+
+            if (err) {
+                return res.status(400).send(err);
+            } 
+
+            const RSO = [];
+
+            for (let i = 0; i < Object.keys(result).length; i++) {
+                let tmp = {
+                    "RSO_id": "",
+                    "admin_id": ""
+                };
+
+                tmp.RSO_id = result[0].RSO_id;
+                tmp.admin_id = result[0].admin_id;
+
+                RSO.push(tmp);
+            }
+
+            console.log(RSO);
+
+            return res.status(200).json({ msg: "RSO created", events: RSO });
+        });
+    });
 });
 
 router.post('/createEvent', (req, res) => {
