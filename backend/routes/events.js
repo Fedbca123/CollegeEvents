@@ -42,7 +42,7 @@ router.post('/getAll', (req, res) => {
         const events = [];
 
         //copies info of each event over to pass
-        for (temp of Object.keys(result).length) {
+        for (temp of result.length) {
             let tmp = {
                 "event_id": "",
                 "name": "",
