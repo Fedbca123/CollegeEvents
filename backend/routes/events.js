@@ -109,7 +109,7 @@ router.post('/private', (req, res) => {
     });
 });
 
-//loads public, private, and RSO events
+//creates RSO event
 //access private
 router.post('/CreateRSO', (req, res) => {
     const { admin_id, RSO_id } = req.body;
@@ -202,13 +202,44 @@ router.post('/createEvent', (req, res) => {
 });
 
 router.post('/addLocation', (req, res) => {
-    
-    const { univ_id, location, date, time } = req.body;
 
-    let sql = '';
+    const { location_id, name, lat, long } = req.body;
 
-    pool.query(sql, [univ_id, location, date, time], (req, res) => {
-        res.json(result[0].count);
+    let sql = 'INSERT INTO Location (location_id, name, lat, long) VALUES (?, ?, ?, ?)';
+
+    pool.query(sql, [location_id, name, lat, long], (req, res) => {
+        
+            if (err) {
+                return res.status(400).send(err);
+            }
+
+            sql = 'SELECT * FROM Location WHERE name = ?';
+
+            pool.query(sql, [name], (req, result) => { 
+
+                const locations = [];
+
+                //copies info of each event over to pass
+                for (let i = 0; i < Object.keys(result).length; i++) {
+                    let tmp = {
+                        "location_id": "2389423",
+                        "name": "",
+                        "lat": 0,
+                        "long": 0,
+                    };
+
+                    tmp.name = result[i].name;
+                    tmp.lat = result[i].lat;
+                    tmp.long = result[i].long;
+                    
+                    locations.push(tmp);
+                }
+
+                console.log(locations);
+
+                return res.status(200).json({ msg: "Location added into DB", location: locations });
+        });
+
     });
 });
 
