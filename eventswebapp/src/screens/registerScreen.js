@@ -38,7 +38,7 @@ const RegisterScreen = () => {
 
     function buildPath(route)
     {       
-        return 'http://localhost:3000/' + route;
+        return 'http://localhost:80/' + route;
     }
 
     function registerUser() {
@@ -65,7 +65,7 @@ const RegisterScreen = () => {
                 <br/><br/>
                 <input className="credInput" type="text" id="userID" onChange ={handleUserId} placeholder="User ID" ref={(c) => userID = c}/>
                 <br/><br/>
-                <input className="credInput" type="password" id="loginPassword"onChange={handlePassword} placeholder="Password" ref={(c) => loginPassword = c}/>
+                <input className="credInput" type="password" id="loginPassword" onChange={handlePassword} placeholder="Password" ref={(c) => loginPassword = c}/>
                 <br/><br/>
                 <button className="btn" type="submit" onClick={registerUser()}>Submit</button>
                 <br/><br/>
