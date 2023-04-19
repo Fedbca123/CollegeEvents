@@ -27,18 +27,70 @@ router.post('/public', (req, res) => {
     });
 });
 
-// CREATE TABLE `COP4710`.`Events` (
-//     event_id VARCHAR(50),
-//     name VARCHAR(50),
-//     location_id VARCHAR(50),
-//     date_and_time TIMESTAMP,
-//     category VARCHAR(50),
-//     phone INT,
-//     email VARCHAR(50),
-//     description VARCHAR(250),
-//     PRIMARY KEY (event_id),
-//     FOREIGN KEY (location_id) REFERENCES Location
-// );
+router.post('/getAllRSOEvents', (req, res) => {
+
+    const { RSO_id } = req.body;
+
+    let sql = 'SELECT * FROM RSO_Events';
+
+    pool.query(sql, RSO_id, (err, result) => {
+
+        if (err) {
+            return res.status(400).send(err);
+        }
+     });
+});
+
+
+router.post('/getAll', (req, res) => {
+    
+    let sql = 'SELECT * FROM Events';
+
+    pool.query(sql, (err, result) => {
+        
+        if (err) {
+            return res.status(400).send(err);
+        }
+
+        if (Object.keys(result).length === 0) {
+            return res.status(450).json({ msg: "No Events in DB!" });
+        } else {
+            const events = [];
+
+            //copies info of each event over to pass
+            for (let i = 0; i < Object.keys(result).length; i++) {
+                let tmp = {
+                    "event_id": "",
+                    "name": "",
+                    "location_id": "",
+                    "date_and_time": "",
+                    "category": "",
+                    "phone": 0,
+                    "email": "",
+                    "description": ""
+                };
+
+                tmp.event_id = result[i].event_id;
+                tmp.name = result[i].name;
+                tmp.location_id = result[i].location_id;
+                tmp.date_and_time = result[i].date_and_time;
+                tmp.category = result[i].category;
+                tmp.email = result[i].email;
+                tmp.description = result[i].description;
+
+                events.push(tmp);
+            }
+
+            console.log(events);
+
+            return res.status(200).json({ msg: "Events Grabbed from DB", events: events });
+        }
+        //creates array of events to pass back to frontend
+        
+    });
+});
+
+
 
 //loads private and public events
 //access private
@@ -57,48 +109,137 @@ router.post('/private', (req, res) => {
     });
 });
 
-//loads public, private, and RSO events
+//creates RSO event
 //access private
-router.post('/rso', (req, res) => {
-    const { username, univ_id } = req.body;
+router.post('/CreateRSO', (req, res) => {
+    const { admin_id, RSO_id } = req.body;
 
-    let sql = 'SELECT idEvent,  rsos.name, rsos.idRSO, events.name AS eventName, events.approved, Events_university_id, events.status, category, description, time, events.date, location, phone, email, rating, numRatings, scoreRatings, RSO_Member_user_id FROM events INNER JOIN rso_members ON events.Events_RSO_id = rso_members.RSO_member_RSO_id AND RSO_Member_user_id = ? INNER JOIN rsos ON events.Events_RSO_id = rsos.idRSO AND Events_university_id = ? AND events.approved = 1 GROUP BY idEvent UNION SELECT idEvent,  rsos.name, rsos.idRSO, events.name AS eventName, events.approved, Events_university_id, events.status, category, description, time, events.date, location, phone, email, rating, numRatings, scoreRatings, RSO_Member_user_id FROM events, rso_members, rsos WHERE events.Events_RSO_id = rsos.idRSO AND (events.Events_university_id = ? AND events.approved = 1 AND events.status = "public") GROUP BY idEvent';
+    let sql = 'INSERT INTO RSO (RSO_id, admin_id) VALUES (?, ?)';
 
-    pool.query(sql, [username, univ_id, univ_id], (err, result) => {
+    pool.query(sql, [RSO_id, admin_id], (err, result) => {
         if (err) {
             return res.status(400).send(err);
         }
 
-        res.json(result);
-    })
+        sql = 'SELECT * FROM RSO WHERE RSO_id = ?'
+
+        pool.query(sql, [RSO_id], (err, result) => {
+
+            if (err) {
+                return res.status(400).send(err);
+            } 
+
+            const RSO = [];
+
+            for (let i = 0; i < Object.keys(result).length; i++) {
+                let tmp = {
+                    "RSO_id": "",
+                    "admin_id": ""
+                };
+
+                tmp.RSO_id = result[0].RSO_id;
+                tmp.admin_id = result[0].admin_id;
+
+                RSO.push(tmp);
+            }
+
+            console.log(RSO);
+
+            return res.status(200).json({ msg: "RSO created", events: RSO });
+        });
+    });
 });
 
-router.post('/create', (req, res) => {
+router.post('/createEvent', (req, res) => {
     
-    //const {} = req.body;
+    const { name, location_id, date_and_time, category, phone, email, description } = req.body;
 
-    let sql = '';
+    let sql = 'INSERT INTO Events (name, location_id, date_and_time, category, phone, email, description) VALUES (?, ?, ?, ?, ?, ?, ?)';
 
-    pool.query(sql, [], (err, result) => {
+    pool.query(sql, [name, location_id, date_and_time, category, phone, email, description], (err, result) => {
         
         if (err) {
             return res.status(400).send(err);
         }
 
-        return res.json(result);
+        sql = 'SELECT * FROM Events WHERE name = ?'
+
+        pool.query(sql, [name], (err, result) => {
+            const events = [];
+
+            //copies info of each event over to pass
+            for (let i = 0; i < Object.keys(result).length; i++) {
+                let tmp = {
+                    "event_id": "12345",
+                    "name": "",
+                    "location_id": "",
+                    "date_and_time": "",
+                    "category": "",
+                    "phone": 0,
+                    "email": "",
+                    "description": ""
+                };
+
+                tmp.event_id = result[i].event_id;
+                tmp.name = result[i].name;
+                tmp.location_id = result[i].location_id;
+                tmp.date_and_time = result[i].date_and_time;
+                tmp.category = result[i].category;
+                tmp.email = result[i].email;
+                tmp.description = result[i].description;
+
+                events.push(tmp);
+            }
+
+            console.log(events);
+
+            return res.status(200).json({ msg: "Events Grabbed from DB", events: events });
+        });
+
     });
 
    
 });
 
-router.post('/checkTime', (req, res) => {
-    
-    const { univ_id, location, date, time } = req.body;
+router.post('/addLocation', (req, res) => {
 
-    let sql = 'SELECT COUNT(*) as count FROM events WHERE (Events_university_id = ? AND location = ? AND date = ? AND time = ?)';
+    const { location_id, name, lat, long } = req.body;
 
-    pool.query(sql, [univ_id, location, date, time], (req, res) => {
-        res.json(result[0].count);
+    let sql = 'INSERT INTO Location (location_id, name, lat, long) VALUES (?, ?, ?, ?)';
+
+    pool.query(sql, [location_id, name, lat, long], (err, result) => {
+        
+            if (err) {
+                return res.status(400).send(err);
+            }
+
+            sql = 'SELECT * FROM Location WHERE name = ?';
+
+            pool.query(sql, [name], (err, result) => { 
+
+                const locations = [];
+
+                //copies info of each event over to pass
+                for (let i = 0; i < Object.keys(result).length; i++) {
+                    let tmp = {
+                        "location_id": "2389423",
+                        "name": "",
+                        "lat": 0,
+                        "long": 0,
+                    };
+
+                    tmp.name = result[i].name;
+                    tmp.lat = result[i].lat;
+                    tmp.long = result[i].long;
+                    
+                    locations.push(tmp);
+                }
+
+                console.log(locations);
+
+                return res.status(200).json({ msg: "Location added into DB", location: locations });
+        });
+
     });
 });
 
