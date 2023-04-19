@@ -38,7 +38,7 @@ router.post('/getAll', (req, res) => {
             return res.status(400).send(err);
         }
 
-        if (Object.keys(result).length !== 1) {
+        if (Object.keys(result).length === 0) {
             return res.status(450).json({ msg: "No Events in DB!" });
         } else {
             const events = [];
