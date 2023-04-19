@@ -38,36 +38,41 @@ router.post('/getAll', (req, res) => {
             return res.status(400).send(err);
         }
 
-        //creates array of events to pass back to frontend
-        const events = [];
+        if (Object.keys(result).length !== 1) {
+            return res.status(450).json({ msg: "No Events in DB!" });
+        } else {
+            const events = [];
 
-        //copies info of each event over to pass
-        for (temp of result.length) {
-            let tmp = {
-                "event_id": "",
-                "name": "",
-                "location_id": "",
-                "date_and_time": "",
-                "category": "",
-                "phone": 0,
-                "email": "",
-                "description": ""
-            };
+            //copies info of each event over to pass
+            for (let i = 0; i < Object.keys(result).length; i++) {
+                let tmp = {
+                    "event_id": "",
+                    "name": "",
+                    "location_id": "",
+                    "date_and_time": "",
+                    "category": "",
+                    "phone": 0,
+                    "email": "",
+                    "description": ""
+                };
 
-            tmp.event_id = temp.event_id;
-            tmp.name = temp.name;
-            tmp.location_id = location_id;
-            tmp.date_and_time = temp.date_and_time;
-            tmp.category = temp.category;
-            tmp.email = temp.email;
-            tmp.description = temp.description;
+                tmp.event_id = result[i].event_id;
+                tmp.name = result[i].name;
+                tmp.location_id = result[i].location_id;
+                tmp.date_and_time = result[i].date_and_time;
+                tmp.category = result[i].category;
+                tmp.email = result[i].email;
+                tmp.description = result[i].description;
 
-            events.push(tmp);
+                events.push(tmp);
+            }
+
+            console.log(events);
+
+            return res.status(200).json({ msg: "Events Grabbed from DB", events: events }); 
         }
-
-        console.log(events);
-
-        return res.status(200).json({ msg: "Events Grabbed from DB", events: events });
+        //creates array of events to pass back to frontend
+        
     })
 })
 
