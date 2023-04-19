@@ -140,28 +140,35 @@ router.post('/createEvent', (req, res) => {
 
         // return res.json(result);
 
-        let tmp = {
-            "event_id": "12345",
-            "name": "",
-            "location_id": "",
-            "date_and_time": "",
-            "category": "",
-            "phone": 0,
-            "email": "",
-            "description": ""
-        };
+        const events = [];
 
-        // tmp.event_id = result[0].event_id;
-        tmp.name = result[0].name;
-        tmp.location_id = result[0].location_id;
-        tmp.date_and_time = result[0].date_and_time;
-        tmp.category = result[0].category;
-        tmp.email = result[0].email;
-        tmp.description = result[0].description;
+            //copies info of each event over to pass
+            for (let i = 0; i < Object.keys(result).length; i++) {
+                let tmp = {
+                    "event_id": "12345",
+                    "name": "",
+                    "location_id": "",
+                    "date_and_time": "",
+                    "category": "",
+                    "phone": 0,
+                    "email": "",
+                    "description": ""
+                };
 
-        console.log(tmp);
+                // tmp.event_id = result[i].event_id;
+                tmp.name = result[i].name;
+                tmp.location_id = result[i].location_id;
+                tmp.date_and_time = result[i].date_and_time;
+                tmp.category = result[i].category;
+                tmp.email = result[i].email;
+                tmp.description = result[i].description;
 
-        return res.status(200).send(tmp);
+                events.push(tmp);
+            }
+
+            console.log(events);
+
+            return res.status(200).json({ msg: "Events Grabbed from DB", events: events });
 
     });
 
