@@ -27,6 +27,50 @@ router.post('/public', (req, res) => {
     });
 });
 
+
+router.post('/getAll', (req, res) => {
+    
+    let sql = 'SELECT * FROM Events';
+
+    pool.query(sql, (err, result) => {
+        
+        if (err) {
+            return res.status(400).send(err);
+        }
+
+        //creates array of events to pass back to frontend
+        const events = [];
+
+        //copies info of each event over to pass
+        for (temp of Object.keys(result).length) {
+            let tmp = {
+                "event_id": "",
+                "name": "",
+                "location_id": "",
+                "date_and_time": "",
+                "category": "",
+                "phone": 0,
+                "email": "",
+                "description": ""
+            };
+
+            tmp.event_id = temp.event_id;
+            tmp.name = temp.name;
+            tmp.location_id = location_id;
+            tmp.date_and_time = temp.date_and_time;
+            tmp.category = temp.category;
+            tmp.email = temp.email;
+            tmp.description = temp.description;
+
+            events.push(tmp);
+        }
+
+        console.log(events);
+
+        return res.status(200).json({ msg: "Events Grabbed from DB", events: events });
+    })
+})
+
 // CREATE TABLE `COP4710`.`Events` (
 //     event_id VARCHAR(50),
 //     name VARCHAR(50),
