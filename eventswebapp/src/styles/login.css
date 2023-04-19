@@ -1,0 +1,203 @@
+h1 {
+    color: #873E23;
+}
+
+body {
+    background-color: #EAB464;
+    text-align: center;
+    background-color: '#DCCCBB';
+}
+
+.credInput {
+    background-color: #DCCCBB;
+    border: none;
+    width: 200px;
+    height: 38px;
+    border-radius: 4px;
+}
+
+.input {
+    background-color: #DCCCBB;
+    border: none;
+    width: 200px;
+    height: 30px;
+    border-radius: 4px;
+}
+
+.btn {
+    background-color: #873E23;
+    color: #DCCCBB;
+    border: none;
+    font-size: 15px;
+    width: 100px;
+    height: 32px;
+    border-radius: 7px;
+}
+
+.btn:hover {
+    background-color: #DCCCBB;
+    color: #000
+}
+
+.columnName {
+    float: left;
+    width: 31.5%;
+    padding: 0px 10px;
+    font-size: 20px;
+}
+
+.RSOcolumn {
+    float: left;
+    width: 48%;
+    padding: 0 10px;
+  }
+  
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+
+.dashHead {
+    display: inline;
+    justify-content: center;
+}
+
+.pageButt {
+    background-color: #DCCCBB;
+    color: #000;
+    border: none;
+    padding: 16px 32px;
+    font-size: 20px;
+    border-radius: 7px;
+    margin-right: 20px;
+}
+
+.addNewButt {
+    float: right;
+    background-color: #8D98A7;
+    color: #000;
+    border: none;
+    padding: 8px 14px;
+    font-size: 20px;
+    border-radius: 7px;
+}
+
+.addNewButt:hover {
+    background-color: #D3D3D3;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+    padding: 16px;
+    text-align: center;
+    background-color: #DCCCBB;
+}
+
+.form-popup {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    right: 15px;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+}
+
+.form-container {
+    max-width: 300px;
+    padding: 10px;
+    background-color: white;
+}
+
+.form-container input[type=text]{
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+}
+
+.form-container input[type=text]:focus{
+    background-color: #ddd;
+    outline: none;
+}
+
+.form-container .btn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom:10px;
+    opacity: 0.8;
+}
+
+.form-container .cancel {
+    background-color: red;
+}
+
+.form-container .btn:hover, .open-button:hover {
+    opacity: 1;
+}
+
+#time {
+    width: 95px
+}
+
+/* Add a black background color to the top navigation */
+.topnav {
+    background-color: #873E23;
+    overflow: hidden;
+}
+  
+  /* Style the links inside the navigation bar */
+.topnav a {
+    color: #FFF;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+  
+/* Change the color of links on hover */
+.topnav a:hover {
+    background-color: #DCCCBB;
+    color: black;
+}
+  
+/* Add a color to the active/current link
+.topnav a.active {
+    background-color: #04AA6D;
+    color: white;
+} */
+
+.navbarButt {
+    float: left;
+    width: 10%;
+}
+
+.logoutButt {
+    float: right;
+    width: 10%;
+}
+
+/* .eventInfo {
+    float: center;
+    width: 300px;
+    margin: auto;
+}
+
+.element {
+    display: flex;
+    justify-content: left;
+} */
+
+.label {
+    margin-right: 10px;
+}
+
+.event {
+    
+}
