@@ -141,7 +141,7 @@ router.post('/createEvent', (req, res) => {
         // return res.json(result);
 
         let tmp = {
-            "event_id": "",
+            "event_id": "12345",
             "name": "",
             "location_id": "",
             "date_and_time": "",
@@ -151,7 +151,7 @@ router.post('/createEvent', (req, res) => {
             "description": ""
         };
 
-        tmp.event_id = result[0].event_id;
+        // tmp.event_id = result[0].event_id;
         tmp.name = result[0].name;
         tmp.location_id = result[0].location_id;
         tmp.date_and_time = result[0].date_and_time;
