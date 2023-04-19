@@ -151,18 +151,17 @@ router.post('/createEvent', (req, res) => {
             "description": ""
         };
 
-        tmp.event_id = result[i].event_id;
-        tmp.name = result[i].name;
-        tmp.location_id = result[i].location_id;
-        tmp.date_and_time = result[i].date_and_time;
-        tmp.category = result[i].category;
-        tmp.email = result[i].email;
-        tmp.description = result[i].description;
+        tmp.event_id = result[0].event_id;
+        tmp.name = result[0].name;
+        tmp.location_id = result[0].location_id;
+        tmp.date_and_time = result[0].date_and_time;
+        tmp.category = result[0].category;
+        tmp.email = result[0].email;
+        tmp.description = result[0].description;
 
         console.log(tmp);
 
         return res.status(200).send(tmp);
-
 
     });
 
