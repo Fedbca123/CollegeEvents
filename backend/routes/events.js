@@ -137,10 +137,10 @@ router.post('/createEvent', (req, res) => {
             return res.status(400).send(err);
         }
 
+        sql = 'SELECT * FROM Events WHERE name = ?'
 
-        // return res.json(result);
-
-        const events = [];
+        pool.query(sql, [name], (err, result) => {
+            const events = [];
 
             //copies info of each event over to pass
             for (let i = 0; i < Object.keys(result).length; i++) {
@@ -155,8 +155,8 @@ router.post('/createEvent', (req, res) => {
                     "description": ""
                 };
 
-                // tmp.event_id = result[i].event_id;
-                // tmp.name = result[i].name;
+                tmp.event_id = result[i].event_id;
+                tmp.name = result[i].name;
                 tmp.location_id = result[i].location_id;
                 tmp.date_and_time = result[i].date_and_time;
                 tmp.category = result[i].category;
@@ -169,6 +169,7 @@ router.post('/createEvent', (req, res) => {
             console.log(events);
 
             return res.status(200).json({ msg: "Events Grabbed from DB", events: events });
+        });
 
     });
 
