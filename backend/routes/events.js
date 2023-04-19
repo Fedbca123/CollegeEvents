@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mySql = require('mysql');
+const { route } = require('./users');
 
 const pool = mySql.createPool({
     host: 'localhost',
@@ -15,7 +16,7 @@ router.post('/public', (req, res) => {
     
     const { univ_id } = req.body;
 
-    let sql = 'SELECT';
+    let sql = 'SELECT idEvent, Events.name AS name, category, description, date_and_time, email, RSO.name FROM Events INNER JOIN RSO On Events. WHERE ';
 
     pool.query(sql, univ_id, (err, result) => {
         if (err) {
@@ -26,13 +27,26 @@ router.post('/public', (req, res) => {
     });
 });
 
+// CREATE TABLE `COP4710`.`Events` (
+//     event_id VARCHAR(50),
+//     name VARCHAR(50),
+//     location_id VARCHAR(50),
+//     date_and_time TIMESTAMP,
+//     category VARCHAR(50),
+//     phone INT,
+//     email VARCHAR(50),
+//     description VARCHAR(250),
+//     PRIMARY KEY (event_id),
+//     FOREIGN KEY (location_id) REFERENCES Location
+// );
+
 //loads private and public events
 //access private
 router.post('/private', (req, res) => {
 
     const { univ_id } = req.body;
 
-    let sql = 'SELECT';
+    let sql = 'SELECT * FROM events WHERE status = "public" OR "private" AND Events_university_id = ?';
 
     pool.query(sql, univ_id, (err, result) => {
         if (err) {
@@ -48,7 +62,7 @@ router.post('/private', (req, res) => {
 router.post('/rso', (req, res) => {
     const { username, univ_id } = req.body;
 
-    let sql = '';
+    let sql = 'SELECT idEvent,  rsos.name, rsos.idRSO, events.name AS eventName, events.approved, Events_university_id, events.status, category, description, time, events.date, location, phone, email, rating, numRatings, scoreRatings, RSO_Member_user_id FROM events INNER JOIN rso_members ON events.Events_RSO_id = rso_members.RSO_member_RSO_id AND RSO_Member_user_id = ? INNER JOIN rsos ON events.Events_RSO_id = rsos.idRSO AND Events_university_id = ? AND events.approved = 1 GROUP BY idEvent UNION SELECT idEvent,  rsos.name, rsos.idRSO, events.name AS eventName, events.approved, Events_university_id, events.status, category, description, time, events.date, location, phone, email, rating, numRatings, scoreRatings, RSO_Member_user_id FROM events, rso_members, rsos WHERE events.Events_RSO_id = rsos.idRSO AND (events.Events_university_id = ? AND events.approved = 1 AND events.status = "public") GROUP BY idEvent';
 
     pool.query(sql, [username, univ_id, univ_id], (err, result) => {
         if (err) {
@@ -85,6 +99,58 @@ router.post('/checkTime', (req, res) => {
 
     pool.query(sql, [univ_id, location, date, time], (req, res) => {
         res.json(result[0].count);
+    });
+});
+
+//loads events that need admin approval
+//access private
+router.post('/getUnapprovedEvents', (req, res) => {
+    
+    const { univ_id } = req.body;
+
+    let sql = 'SELECT idEvent, events.name AS eventName, category, description, time, events.date, location, phone, email, rating, numRatings, scoreRatings, rsos.name FROM events INNER JOIN rsos ON events.Events_RSO_id = rsos.idRSO WHERE events.approved = 0 AND events.Events_university_id = ?';
+
+    pool.query(sql, university_id, (err, result) => {
+
+        if (err) {
+            return res.status(400).send(err);
+        }
+
+        return res.json(result);
+    });
+});
+
+//loads events that need admin approval
+//access private
+router.post('/approveEvent', (req, res) => {
+    
+    const { event_id } = req.body;
+
+    let sql = 'UPDATE Events SET approved = 1 WHERE event_id = ?'
+    pool.query(sql, event_id, (err, result) => {
+
+        if (err) {
+            return res.status(400).send(err);
+        }
+
+        return res.json(result);
+    })
+});
+
+//loads events that need admin approval
+//access private
+router.post('/denyEvent', (req, res) => {
+
+    const { event_id } = req.body;
+    
+    let sql = 'DELETE FROM Events WHERE event_id = ?';
+    pool.query(sql, event_id, (err, result) => {
+        
+        if (err) {
+            return res.status(400).send(err);
+        }
+
+        return res.json(result);
     });
 });
 
